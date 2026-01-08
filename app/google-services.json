@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "769468825156",
+    "firebase_url": "https://hall-management-system-53825-default-rtdb.firebaseio.com",
+    "project_id": "hall-management-system-53825",
+    "storage_bucket": "hall-management-system-53825.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769468825156:android:f24206866095d007ad0611",
+        "android_client_info": {
+          "package_name": "com.example.rana_2207094_hall_management_system_android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALK9_aY-u5FkilWhf4MnGoNIclQ_XdUuU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
