@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#FFFFFF"
+    tools:context=".StudentProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Profile"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#333333"
+            android:layout_marginBottom="20dp"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_gravity="center"
+            android:background="#EEEEEE"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student Roll"
+            android:textColor="#666666"/>
+        <EditText
+            android:id="@+id/rollTxt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student Name"
+            android:textColor="#666666"/>
+        <EditText
+            android:id="@+id/nameTxt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student E-mail"
+            android:textColor="#666666"/>
+        <EditText
+            android:id="@+id/emailTxt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textColor="#666666"/>
+        <EditText
+            android:id="@+id/addressTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="2"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Department"
+            android:textColor="#666666"/>
+        <EditText
+            android:id="@+id/departmentTxt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CGPA"
+            android:textColor="#666666"/>
+        <EditText
+            android:id="@+id/cgpaTxt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Birth Date"
+            android:textColor="#666666"/>
+        <EditText
+            android:id="@+id/birthDateTxt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="25dp"/>
+
+        <Button
+            android:id="@+id/goBackBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Go Back"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="#757575"
+            android:layout_marginBottom="20dp"
+            android:visibility="visible"/>
+
+        <Button
+            android:id="@+id/approveBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Approve"
+            android:backgroundTint="#4CAF50"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+</ScrollView>
