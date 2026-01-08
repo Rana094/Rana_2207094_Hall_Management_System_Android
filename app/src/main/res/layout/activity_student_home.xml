@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    android:padding="20dp"
+    tools:context=".StudentHomeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome"
+            android:textColor="#666666"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/nameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loading..."
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_marginBottom="30dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/myProfileBtn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="My Profile"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:id="@+id/checkHallDueBtn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Check Hall Due"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:id="@+id/viewNoticesBtn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="View Notices"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:id="@+id/reqDiningManagerBtn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Req. Dining Manager"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:id="@+id/reqToRemoveBtn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Request to Remove"
+                android:textSize="16sp"
+                android:backgroundTint="#FF9800"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:id="@+id/changePasswordBtn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Change Password"
+                android:textSize="16sp"
+                android:backgroundTint="#607D8B"
+                android:layout_marginBottom="30dp"/>
+
+            <Button
+                android:id="@+id/signOutBtn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Sign Out"
+                android:textSize="16sp"
+                android:backgroundTint="#D32F2F"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

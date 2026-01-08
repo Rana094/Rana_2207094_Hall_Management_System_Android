@@ -26,7 +26,7 @@ public class FirebaseManager {
     }
 
 
-    public void saveStudent(Student student, FirestoreCallback callback) {
+    public void saveStudent(Student student, DatabaseCallback callback) {
 
         student.setStatus("false");
         student.setRemoveStatus("false");
@@ -37,14 +37,14 @@ public class FirebaseManager {
                 .addOnFailureListener(callback::onError);
     }
 
-    public void deleteStudent(int roll, FirestoreCallback callback) {
+    public void deleteStudent(int roll, DatabaseCallback callback) {
         dbRef.child(NODE_STUDENTS).child(String.valueOf(roll))
                 .removeValue()
                 .addOnSuccessListener(aVoid -> callback.checkResult(true))
                 .addOnFailureListener(callback::onError);
     }
 
-    public void getStudentByRoll(int roll, FirestoreCallback callback) {
+    public void getStudentByRoll(int roll, DatabaseCallback callback) {
         dbRef.child(NODE_STUDENTS).child(String.valueOf(roll))
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -73,7 +73,7 @@ public class FirebaseManager {
                 .updateChildren(updates);
     }
 
-    public void getActiveStudents(FirestoreCallback callback) {
+    public void getActiveStudents(DatabaseCallback callback) {
         dbRef.child(NODE_STUDENTS).orderByChild("status").equalTo("true")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -92,7 +92,7 @@ public class FirebaseManager {
                 });
     }
 
-    public void getPendingStudents(FirestoreCallback callback) {
+    public void getPendingStudents(DatabaseCallback callback) {
         dbRef.child(NODE_STUDENTS).orderByChild("status").equalTo("false")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -112,14 +112,14 @@ public class FirebaseManager {
     }
 
 
-    public void insertNotice(String title, String message, FirestoreCallback callback) {
-        String key = dbRef.child(NODE_NOTICES).push().getKey(); // Generate unique ID
+    public void insertNotice(String title, String message, DatabaseCallback callback) {
+        String key = dbRef.child(NODE_NOTICES).push().getKey();
 
         Map<String, Object> notice = new HashMap<>();
         notice.put("id", key);
         notice.put("title", title);
         notice.put("message", message);
-        notice.put("created_at", System.currentTimeMillis()); // Use system time for Realtime DB
+        notice.put("created_at", System.currentTimeMillis());
 
         if (key != null) {
             dbRef.child(NODE_NOTICES).child(key).setValue(notice)
@@ -129,7 +129,7 @@ public class FirebaseManager {
     }
 
 
-    public void login(int roll, String password, FirestoreCallback callback) {
+    public void login(int roll, String password, DatabaseCallback callback) {
         dbRef.child(NODE_STUDENTS).child(String.valueOf(roll))
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -154,7 +154,7 @@ public class FirebaseManager {
                 });
     }
 
-    public void checkRollExists(int roll, FirestoreCallback callback) {
+    public void checkRollExists(int roll, DatabaseCallback callback) {
         dbRef.child(NODE_STUDENTS).child(String.valueOf(roll))
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

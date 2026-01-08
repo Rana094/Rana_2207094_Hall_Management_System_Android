@@ -6,70 +6,131 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Toast;
-
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText etRollNumber, etPassword;
-    private CheckBox cbShowPassword;
-    private Button btnLogin, btnRegister, btnAdminLogin;
+    private EditText usernameTxtStudent;
+    private EditText passwordTxtStudent;
+    private CheckBox checkBox;
+    private Button loginBtnStudent;
+    private Button gotoAdminPageBtn;
+    private Button gotoRegisterPageBtn;
+
+    private FirebaseManager firebaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        firebaseManager = new FirebaseManager();
 
-        etRollNumber = findViewById(R.id.etRollNumber);
-        etPassword = findViewById(R.id.etPassword);
-        cbShowPassword = findViewById(R.id.cbShowPassword);
-        btnLogin = findViewById(R.id.btnLogin);
+        usernameTxtStudent = findViewById(R.id.usernameTxtStudent);
+        passwordTxtStudent = findViewById(R.id.passwordTxtStudent);
+        checkBox = findViewById(R.id.checkBox);
+        loginBtnStudent = findViewById(R.id.loginBtnStudent);
+        gotoAdminPageBtn = findViewById(R.id.gotoAdminPageBtn);
+        gotoRegisterPageBtn = findViewById(R.id.gotoRegisterPageBtn);
 
-        btnRegister = findViewById(R.id.btnGoToRegister);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
 
-        btnAdminLogin = findViewById(R.id.btnGoToAdmin);
+                    passwordTxtStudent.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
 
-        cbShowPassword.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
+                    passwordTxtStudent.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
 
-                etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-            } else {
-
-                etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                passwordTxtStudent.setSelection(passwordTxtStudent.getText().length());
             }
         });
 
-        btnLogin.setOnClickListener(v -> {
-            String roll = etRollNumber.getText().toString();
-            String pass = etPassword.getText().toString();
+        loginBtnStudent.setOnClickListener(v -> performLogin());
 
-            if(roll.isEmpty() || pass.isEmpty()){
-                Toast.makeText(MainActivity.this, "Please enter Username and Password", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            Toast.makeText(MainActivity.this, "Logging in...", Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(MainActivity.this, StudentHomeActivity.class);
-            intent.putExtra("USER_ROLL", roll); // Passing the roll number to the next screen
-            startActivity(intent);
-        });
-
-        btnRegister.setOnClickListener(v -> {
-            Toast.makeText(MainActivity.this, "Going to Register Page", Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-            startActivity(intent);
-        });
-
-        btnAdminLogin.setOnClickListener(v -> {
-            Toast.makeText(MainActivity.this, "Going to Admin Login", Toast.LENGTH_SHORT).show();
-
+        gotoAdminPageBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AdminLoginActivity.class);
             startActivity(intent);
         });
+
+        gotoRegisterPageBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    private void performLogin() {
+        String rollText = usernameTxtStudent.getText().toString().trim();
+        String password = passwordTxtStudent.getText().toString();
+
+        if (rollText.isEmpty() || password.isEmpty()) {
+            showAlert("Warning", "Username and password are required");
+            return;
+        }
+
+        int roll;
+        try {
+            roll = Integer.parseInt(rollText);
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Roll must be a number");
+            return;
+        }
+
+        loginBtnStudent.setEnabled(false);
+        loginBtnStudent.setText("Checking...");
+
+        firebaseManager.getStudentByRoll(roll, new DatabaseCallback() {
+            @Override
+            public void onStudentReceived(Student student) {
+                // Reset button
+                loginBtnStudent.setEnabled(true);
+                loginBtnStudent.setText("Login");
+
+                if (student == null) {
+
+                    showAlert("Error", "User doesn't exist");
+                } else {
+
+                    if (!student.getPassword().equals(password)) {
+                        showAlert("Error", "Password doesn't match with username");
+                    }
+
+                    else if ("false".equals(student.getStatus())) {
+                        showAlert("Error", "Admin has not Approved Yet, kindly contact the Hall Office");
+                    }
+
+                    else {
+                        gotoStudentProfile(student.getRoll());
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                loginBtnStudent.setEnabled(true);
+                loginBtnStudent.setText("Login");
+                showAlert("Connection Error", e.getMessage());
+            }
+        });
+    }
+
+    private void gotoStudentProfile(int roll) {
+        Intent intent = new Intent(MainActivity.this, StudentHomeActivity.class);
+        intent.putExtra("LOGGED_IN_ROLL", roll);
+        startActivity(intent);
+        finish();
+    }
+
+    private void showAlert(String title, String msg) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(msg)
+                .setPositiveButton("OK", null)
+                .show();
     }
 }

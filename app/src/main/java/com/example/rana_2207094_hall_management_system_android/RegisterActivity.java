@@ -104,7 +104,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void submitClick() {
-        // Validation: Text fields are still mandatory
         if (isEmpty(rollTxt) || isEmpty(nameTxt) || isEmpty(passwordTxt)) {
             showAlert("Warning", "Please fill all fields");
             return;
@@ -128,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
         signupBtn.setEnabled(false);
         signupBtn.setText("Checking...");
 
-        firebaseManager.checkRollExists(roll, new FirestoreCallback() {
+        firebaseManager.checkRollExists(roll, new DatabaseCallback() {
             @Override
             public void checkResult(boolean exists) {
                 if (exists) {
@@ -163,7 +162,7 @@ public class RegisterActivity extends AppCompatActivity {
                 passwordTxt.getText().toString()
         );
 
-        firebaseManager.saveStudent(student, new FirestoreCallback() {
+        firebaseManager.saveStudent(student, new DatabaseCallback() {
             @Override
             public void checkResult(boolean success) {
                 if (success) {

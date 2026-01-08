@@ -19,7 +19,7 @@
         android:layout_marginBottom="40dp"/>
 
     <EditText
-        android:id="@+id/etRollNumber"
+        android:id="@+id/usernameTxtStudent"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Enter Roll Number"
@@ -28,7 +28,7 @@
         android:layout_marginBottom="15dp"/>
 
     <EditText
-        android:id="@+id/etPassword"
+        android:id="@+id/passwordTxtStudent"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Password"
@@ -37,7 +37,7 @@
         android:layout_marginBottom="10dp"/>
 
     <CheckBox
-        android:id="@+id/cbShowPassword"
+        android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Show Password"
@@ -45,7 +45,7 @@
         android:layout_marginBottom="20dp"/>
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/loginBtnStudent"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="LOG IN"
@@ -54,7 +54,7 @@
         android:layout_marginBottom="15dp"/>
 
     <Button
-        android:id="@+id/btnGoToRegister"
+        android:id="@+id/gotoRegisterPageBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register New Account"
@@ -62,7 +62,7 @@
         android:layout_marginBottom="10dp"/>
 
     <Button
-        android:id="@+id/btnGoToAdmin"
+        android:id="@+id/gotoAdminPageBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Admin Login"
