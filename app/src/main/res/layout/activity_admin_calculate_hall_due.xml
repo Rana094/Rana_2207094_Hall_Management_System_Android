@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#FFFFFF"
+    tools:context=".AdminCalculateHallDueActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculate Hall Due"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="30dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Month"
+            android:textColor="#666666"
+            android:layout_marginBottom="5dp"/>
+
+        <Spinner
+            android:id="@+id/monthSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amount"
+            android:textColor="#666666"
+            android:layout_marginBottom="5dp"/>
+
+        <EditText
+            android:id="@+id/amountField"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter amount"
+            android:inputType="number"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="30dp"/>
+
+        <Button
+            android:id="@+id/generateBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Generate Bill"
+            android:backgroundTint="#2196F3"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/viewBillsBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="View Generated Bills"
+            android:backgroundTint="#FF9800"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/goBackBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Go Back"
+            android:backgroundTint="#757575"/>
+
+    </LinearLayout>
+</ScrollView>
