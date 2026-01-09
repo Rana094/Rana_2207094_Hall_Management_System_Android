@@ -268,5 +268,12 @@ public class FirebaseManager {
         });
     }
 
+    public void markBillAsPaid(int roll, String month, DatabaseCallback callback) {
+        dbRef.child("Payments").child(String.valueOf(roll)).child(month).setValue(true)
+                .addOnSuccessListener(aVoid -> callback.checkResult(true))
+                .addOnFailureListener(e -> callback.onError(e));
+    }
+
+
 
 }
