@@ -27,7 +27,7 @@ public class AdminLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_login); // Link to the XML created above
+        setContentView(R.layout.activity_admin_login);
 
         etUsernameAdmin = findViewById(R.id.etUsernameAdmin);
         etPasswordAdmin = findViewById(R.id.etPasswordAdmin);

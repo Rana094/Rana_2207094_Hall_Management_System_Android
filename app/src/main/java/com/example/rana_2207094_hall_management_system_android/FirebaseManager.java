@@ -115,7 +115,6 @@ public class FirebaseManager {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
-                            // Check password
                             Student s = snapshot.getValue(Student.class);
                             if (s != null && s.getPassword().equals(password)) {
                                 callback.checkResult(true);
@@ -164,7 +163,7 @@ public class FirebaseManager {
                 for (DataSnapshot data : snapshot.getChildren()) {
                     Student student = data.getValue(Student.class);
                     if (student != null) {
-                        // Check if status is "false"
+
                         String status = String.valueOf(student.getStatus());
                         if (status.equalsIgnoreCase("false")) {
                             pendingList.add(student);
@@ -173,6 +172,7 @@ public class FirebaseManager {
                 }
                 callback.onStudentListReceived(pendingList);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 callback.onError(error.toException());
@@ -186,4 +186,19 @@ public class FirebaseManager {
                 .addOnSuccessListener(aVoid -> callback.checkResult(true))
                 .addOnFailureListener(e -> callback.onError(e));
     }
+
+    public void generateMonthlyBill(String month, int amount, DatabaseCallback callback) {
+
+        String billId = month;
+
+        java.util.Map<String, Object> billData = new java.util.HashMap<>();
+        billData.put("month", month);
+        billData.put("amount", amount);
+        billData.put("generatedDate", System.currentTimeMillis());
+
+        dbRef.child("HallBills").child(billId).setValue(billData)
+                .addOnSuccessListener(aVoid -> callback.checkResult(true))
+                .addOnFailureListener(e -> callback.onError(e));
+    }
+
 }

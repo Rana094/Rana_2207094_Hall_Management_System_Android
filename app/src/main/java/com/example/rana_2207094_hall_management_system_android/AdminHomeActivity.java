@@ -61,8 +61,8 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         calculateHallDueBtn.setOnClickListener(v -> {
 
-            // Intent intent = new Intent(AdminHomeActivity.this, AdminCalculateHallDueActivity.class);
-            // startActivity(intent);
+             Intent intent = new Intent(AdminHomeActivity.this, AdminCalculateHallDueActivity.class);
+             startActivity(intent);
             Toast.makeText(this, "Go to Calculate Due", Toast.LENGTH_SHORT).show();
         });
 
