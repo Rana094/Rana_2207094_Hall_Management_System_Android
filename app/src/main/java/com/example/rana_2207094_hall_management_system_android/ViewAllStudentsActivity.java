@@ -42,7 +42,6 @@ public class ViewAllStudentsActivity extends AppCompatActivity implements Studen
         loadActiveStudents();
     }
 
-
     private void setupButtons() {
 
         goBackBtn.setOnClickListener(v -> finish());
@@ -58,7 +57,6 @@ public class ViewAllStudentsActivity extends AppCompatActivity implements Studen
                 public void checkResult(boolean isSuccess) {
                     if (isSuccess) {
                         Toast.makeText(ViewAllStudentsActivity.this, "Deleted: " + selectedStudent.getName(), Toast.LENGTH_SHORT).show();
-
                         loadActiveStudents();
                         selectedStudent = null;
                     } else {
@@ -72,7 +70,6 @@ public class ViewAllStudentsActivity extends AppCompatActivity implements Studen
             });
         });
 
-        // UPDATE
         updateStudentBtn.setOnClickListener(v -> {
             if (selectedStudent == null) {
                 Toast.makeText(this, "Please select a student first!", Toast.LENGTH_SHORT).show();
@@ -90,7 +87,8 @@ public class ViewAllStudentsActivity extends AppCompatActivity implements Studen
             @Override
             public void onStudentListReceived(List<Student> students) {
                 if (students != null && !students.isEmpty()) {
-                    adapter = new StudentAdapter(ViewAllStudentsActivity.this, students, ViewAllStudentsActivity.this);
+
+                    adapter = new StudentAdapter(ViewAllStudentsActivity.this, students, ViewAllStudentsActivity.this, false);
                     recyclerView.setAdapter(adapter);
                 } else {
                     Toast.makeText(ViewAllStudentsActivity.this, "No active students found", Toast.LENGTH_SHORT).show();

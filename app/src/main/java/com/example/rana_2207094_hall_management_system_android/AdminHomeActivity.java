@@ -43,15 +43,15 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         viewAllStudentBtn.setOnClickListener(v -> {
 
-            // Intent intent = new Intent(AdminHomeActivity.this, ViewAllStudentsActivity.class);
-            // startActivity(intent);
+             Intent intent = new Intent(AdminHomeActivity.this, ViewAllStudentsActivity.class);
+             startActivity(intent);
             Toast.makeText(this, "Go to View All Students", Toast.LENGTH_SHORT).show();
         });
 
         pendingApprovalBtn.setOnClickListener(v -> {
 
-            // Intent intent = new Intent(AdminHomeActivity.this, AdminPendingApprovalActivity.class);
-            // startActivity(intent);
+             Intent intent = new Intent(AdminHomeActivity.this, AdminPendingApprovalActivity.class);
+             startActivity(intent);
             Toast.makeText(this, "Go to Pending Approvals", Toast.LENGTH_SHORT).show();
         });
 

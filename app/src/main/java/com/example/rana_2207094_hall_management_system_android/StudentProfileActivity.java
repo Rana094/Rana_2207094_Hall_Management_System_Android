@@ -21,6 +21,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student_profile);
 
         studentRoll = getIntent().getIntExtra("LOGGED_IN_ROLL", -1);
+        boolean isAdminView = getIntent().getBooleanExtra("IS_ADMIN_VIEW", false);
 
         firebaseManager = new FirebaseManager();
 
@@ -39,12 +40,38 @@ public class StudentProfileActivity extends AppCompatActivity {
             loadStudentData();
         } else {
             Toast.makeText(this, "Error: No Roll Number Found", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
         }
 
+        if (isAdminView) {
 
-        goBackBtn.setOnClickListener(v -> {
+            approveBtn.setVisibility(View.VISIBLE);
 
-            finish();
+            approveBtn.setOnClickListener(v -> performApproval());
+        } else {
+
+            approveBtn.setVisibility(View.GONE);
+        }
+        goBackBtn.setOnClickListener(v -> finish());
+    }
+
+    private void performApproval() {
+        firebaseManager.approveStudent(studentRoll, new DatabaseCallback() {
+            @Override
+            public void checkResult(boolean isSuccess) {
+                if (isSuccess) {
+                    Toast.makeText(StudentProfileActivity.this, "Student Approved Successfully!", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(StudentProfileActivity.this, "Failed to Approve.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(StudentProfileActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -53,7 +80,6 @@ public class StudentProfileActivity extends AppCompatActivity {
             @Override
             public void onStudentReceived(Student student) {
                 if (student != null) {
-
                     rollTxt.setText(String.valueOf(student.getRoll()));
                     nameTxt.setText(student.getName());
                     emailTxt.setText(student.getEmail());
@@ -61,6 +87,7 @@ public class StudentProfileActivity extends AppCompatActivity {
                     departmentTxt.setText(student.getDept());
                     cgpaTxt.setText(student.getCgpa());
                     birthDateTxt.setText(student.getBirthdate());
+
                 } else {
                     Toast.makeText(StudentProfileActivity.this, "Student data not found", Toast.LENGTH_SHORT).show();
                 }

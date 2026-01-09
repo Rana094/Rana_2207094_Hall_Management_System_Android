@@ -92,26 +92,6 @@ public class FirebaseManager {
                 });
     }
 
-    public void getPendingStudents(DatabaseCallback callback) {
-        dbRef.child(NODE_STUDENTS).orderByChild("status").equalTo("false")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        List<Student> list = new ArrayList<>();
-                        for (DataSnapshot child : snapshot.getChildren()) {
-                            list.add(child.getValue(Student.class));
-                        }
-                        callback.onStudentListReceived(list);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        callback.onError(error.toException());
-                    }
-                });
-    }
-
-
     public void insertNotice(String title, String message, DatabaseCallback callback) {
         String key = dbRef.child(NODE_NOTICES).push().getKey();
 
@@ -167,5 +147,43 @@ public class FirebaseManager {
                         callback.onError(error.toException());
                     }
                 });
+    }
+
+    public void updateStudentData(int roll, Map<String, Object> updates, DatabaseCallback callback) {
+        dbRef.child(NODE_STUDENTS).child(String.valueOf(roll))
+                .updateChildren(updates)
+                .addOnSuccessListener(aVoid -> callback.checkResult(true))
+                .addOnFailureListener(e -> callback.onError(e));
+    }
+
+    public void getPendingStudents(final DatabaseCallback callback) {
+        dbRef.child(NODE_STUDENTS).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Student> pendingList = new ArrayList<>();
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    Student student = data.getValue(Student.class);
+                    if (student != null) {
+                        // Check if status is "false"
+                        String status = String.valueOf(student.getStatus());
+                        if (status.equalsIgnoreCase("false")) {
+                            pendingList.add(student);
+                        }
+                    }
+                }
+                callback.onStudentListReceived(pendingList);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.onError(error.toException());
+            }
+        });
+    }
+
+    public void approveStudent(int roll, final DatabaseCallback callback) {
+        dbRef.child(NODE_STUDENTS).child(String.valueOf(roll))
+                .child("status").setValue("true")
+                .addOnSuccessListener(aVoid -> callback.checkResult(true))
+                .addOnFailureListener(e -> callback.onError(e));
     }
 }

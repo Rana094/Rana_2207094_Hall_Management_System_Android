@@ -14,6 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rana_2207094_Hall_Management_System_Android">
         <activity
+            android:name=".AdminPendingApprovalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminUpdateStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewAllStudentsActivity"
+            android:exported="false" />
+        <activity
             android:name=".StudentProfileActivity"
             android:exported="false" />
         <activity

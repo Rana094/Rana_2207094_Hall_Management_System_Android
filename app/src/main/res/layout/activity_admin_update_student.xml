@@ -5,22 +5,21 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     android:background="#FFFFFF"
-    tools:context=".StudentProfileActivity">
+    tools:context=".AdminUpdateStudentActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/textLabel"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Student Profile"
+            android:text="Update Your Info"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="#333333"
+            android:textColor="#D32F2F"
             android:layout_marginBottom="20dp"/>
 
         <ImageView
@@ -28,130 +27,105 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@android:drawable/ic_menu_gallery"
-            android:layout_gravity="center"
             android:background="#EEEEEE"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/chooseImageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Choose Photo"
+            android:textSize="12sp"
+            android:backgroundTint="#757575"
             android:layout_marginBottom="20dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Student Roll"
-            android:textColor="#666666"/>
-        <EditText
-            android:id="@+id/rollTxt"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:enabled="false"
-            android:textColor="#000000"
-            android:background="@android:drawable/edit_text"
-            android:layout_marginBottom="15dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Student Name"
-            android:textColor="#666666"/>
         <EditText
             android:id="@+id/nameTxt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:enabled="false"
-            android:textColor="#000000"
+            android:hint="Enter Your Name"
             android:background="@android:drawable/edit_text"
             android:layout_marginBottom="15dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Student E-mail"
-            android:textColor="#666666"/>
+        <EditText
+            android:id="@+id/passwordTxt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="New Password (leave empty to keep)"
+            android:inputType="textPassword"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="15dp"/>
+
+        <EditText
+            android:id="@+id/confirmpasswordTxt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="15dp"/>
+
         <EditText
             android:id="@+id/emailTxt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:enabled="false"
-            android:textColor="#000000"
+            android:hint="Enter Your E-mail"
+            android:inputType="textEmailAddress"
             android:background="@android:drawable/edit_text"
             android:layout_marginBottom="15dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Address"
-            android:textColor="#666666"/>
         <EditText
             android:id="@+id/addressTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minLines="2"
-            android:enabled="false"
-            android:textColor="#000000"
+            android:hint="Enter Your Address"
             android:background="@android:drawable/edit_text"
             android:layout_marginBottom="15dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Department"
-            android:textColor="#666666"/>
         <EditText
             android:id="@+id/departmentTxt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:enabled="false"
-            android:textColor="#000000"
+            android:hint="Enter Department"
             android:background="@android:drawable/edit_text"
             android:layout_marginBottom="15dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CGPA"
-            android:textColor="#666666"/>
         <EditText
             android:id="@+id/cgpaTxt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:enabled="false"
-            android:textColor="#000000"
+            android:hint="CGPA"
+            android:inputType="numberDecimal"
             android:background="@android:drawable/edit_text"
             android:layout_marginBottom="15dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Birth Date"
-            android:textColor="#666666"/>
         <EditText
             android:id="@+id/birthDateTxt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:enabled="false"
-            android:textColor="#000000"
+            android:hint="Select Birth Date"
+            android:focusable="false"
+            android:clickable="true"
             android:background="@android:drawable/edit_text"
-            android:layout_marginBottom="25dp"/>
+            android:layout_marginBottom="30dp"/>
 
         <Button
-            android:id="@+id/approveBtn"
+            android:id="@+id/updateBtn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Approve Student"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:backgroundTint="#4CAF50"
-            android:layout_marginBottom="10dp"
-            android:visibility="gone"/>
+            android:text="Update"
+            android:backgroundTint="#2196F3"
+            android:layout_marginBottom="10dp"/>
 
         <Button
-            android:id="@+id/goBackBtn"
+            android:id="@+id/goBack"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Go Back"
-            android:textSize="16sp"
             android:textStyle="bold"
-            android:backgroundTint="#757575"
-            android:layout_marginBottom="20dp"
-            android:visibility="visible"/>
+            android:backgroundTint="#D32F2F"/>
 
     </LinearLayout>
 </ScrollView>
