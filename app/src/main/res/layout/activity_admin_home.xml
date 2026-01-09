@@ -1,10 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    android:padding="20dp"
     tools:context=".AdminHomeActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin Dashboard"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/sendNoticeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Send Notice"
+            android:textSize="16sp"
+            android:backgroundTint="#2196F3"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/viewAllStudentBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="View All Students"
+            android:textSize="16sp"
+            android:backgroundTint="#2196F3"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/pendingApprovalBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Pending Approval"
+            android:textSize="16sp"
+            android:backgroundTint="#FF9800"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/diningManagerApprovalBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Dining Manager Approval"
+            android:textSize="16sp"
+            android:backgroundTint="#FF9800"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/calculateHallDueBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Calculate Hall Due"
+            android:textSize="16sp"
+            android:backgroundTint="#4CAF50"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/removeStudentBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Remove Student"
+            android:textSize="16sp"
+            android:backgroundTint="#D32F2F"
+            android:layout_marginBottom="30dp"/>
+
+        <Button
+            android:id="@+id/signOutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign Out"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#607D8B"/>
+
+    </LinearLayout>
+</ScrollView>
