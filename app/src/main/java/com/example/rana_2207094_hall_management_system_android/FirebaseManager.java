@@ -200,5 +200,73 @@ public class FirebaseManager {
                 .addOnSuccessListener(aVoid -> callback.checkResult(true))
                 .addOnFailureListener(e -> callback.onError(e));
     }
+    public void getAllHallBills(final DatabaseCallback callback) {
+        dbRef.child("HallBills").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<HallBill> billList = new ArrayList<>();
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    HallBill bill = data.getValue(HallBill.class);
+                    if (bill != null) {
+                        billList.add(bill);
+                    }
+                }
+                callback.onHallBillsReceived(billList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.onError(error.toException());
+            }
+        });
+    }
+
+    public void getTotalHallDue(int roll, final DatabaseCallback callback) {
+        getUnpaidBillsForStudent(roll, new DatabaseCallback() {
+            @Override
+            public void onHallBillsReceived(List<HallBill> bills) {
+                int total = 0;
+                if (bills != null) {
+                    for (HallBill bill : bills) {
+                        total += bill.getAmount();
+                    }
+                }
+                callback.onTotalDueReceived(total);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                callback.onError(e);
+            }
+        });
+    }
+    public void getUnpaidBillsForStudent(int roll, final DatabaseCallback callback) {
+        getAllHallBills(new DatabaseCallback() {
+            @Override
+            public void onHallBillsReceived(List<HallBill> allBills) {
+                dbRef.child("Payments").child(String.valueOf(roll)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<HallBill> unpaidList = new ArrayList<>();
+
+                        for (HallBill bill : allBills) {
+                            if (!snapshot.hasChild(bill.getMonth())) {
+                                unpaidList.add(bill);
+                            }
+                        }
+                        callback.onHallBillsReceived(unpaidList);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        callback.onError(error.toException());
+                    }
+                });
+            }
+            @Override
+            public void onError(Exception e) { callback.onError(e); }
+        });
+    }
+
 
 }

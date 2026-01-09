@@ -1,5 +1,6 @@
 package com.example.rana_2207094_hall_management_system_android;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -17,8 +18,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
     private Context context;
     private OnStudentListener mOnStudentListener;
     private int selectedPosition = -1;
-
     private boolean isPendingMode;
+
+    private FirebaseManager firebaseManager;
 
     public interface OnStudentListener {
         void onStudentClick(int position);
@@ -29,6 +31,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         this.studentList = studentList;
         this.mOnStudentListener = onStudentListener;
         this.isPendingMode = isPendingMode;
+
+        this.firebaseManager = new FirebaseManager();
     }
 
     @NonNull
@@ -39,7 +43,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StudentViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Student student = studentList.get(position);
 
         holder.nameTxt.setText(student.getName());
@@ -52,8 +56,26 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             holder.dueTxt.setTextColor(Color.parseColor("#388E3C"));
         } else {
 
-            holder.dueTxt.setText("Due: 0 Tk");
-            holder.dueTxt.setTextColor(Color.parseColor("#D32F2F"));
+            holder.dueTxt.setText("Checking...");
+            holder.dueTxt.setTextColor(Color.GRAY);
+
+            firebaseManager.getTotalHallDue(student.getRoll(), new DatabaseCallback() {
+                @Override
+                public void onTotalDueReceived(int amount) {
+
+                    if (holder.getAdapterPosition() == position) {
+                        holder.dueTxt.setText("Due: " + amount + " Tk");
+                        holder.dueTxt.setTextColor(Color.parseColor("#D32F2F"));
+                    }
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    if (holder.getAdapterPosition() == position) {
+                        holder.dueTxt.setText("Due: Error");
+                    }
+                }
+            });
         }
 
         if (selectedPosition == position) {
@@ -68,6 +90,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             mOnStudentListener.onStudentClick(selectedPosition);
         });
     }
+
     public Student getSelectedStudent() {
         if (selectedPosition != -1 && selectedPosition < studentList.size()) {
             return studentList.get(selectedPosition);
