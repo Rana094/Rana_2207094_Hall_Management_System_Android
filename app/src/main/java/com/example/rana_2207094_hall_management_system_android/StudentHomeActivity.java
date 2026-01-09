@@ -26,7 +26,7 @@ public class StudentHomeActivity extends AppCompatActivity {
 
         if (loggedInRoll == -1) {
             Toast.makeText(this, "Error loading user session", Toast.LENGTH_SHORT).show();
-            finish(); // Go back
+            finish();
             return;
         }
 
@@ -70,30 +70,48 @@ public class StudentHomeActivity extends AppCompatActivity {
     private void setupClickListeners() {
 
         myProfileBtn.setOnClickListener(v -> {
-             Toast.makeText(this, "Opening Profile...", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(StudentHomeActivity.this, StudentProfileActivity.class);
+            intent.putExtra("LOGGED_IN_ROLL", loggedInRoll);
+            intent.putExtra("IS_ADMIN_VIEW", false);
+            startActivity(intent);
+        });
 
-             Intent intent = new Intent(StudentHomeActivity.this, StudentProfileActivity.class);
-             intent.putExtra("LOGGED_IN_ROLL", loggedInRoll);
-             startActivity(intent);
+        checkHallDueBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(StudentHomeActivity.this, StudentHallDuesActivity.class);
+            intent.putExtra("LOGGED_IN_ROLL", loggedInRoll);
+            startActivity(intent);
         });
 
         viewNoticesBtn.setOnClickListener(v -> {
-            // Intent intent = new Intent(StudentHomeActivity.this, NoticeActivity.class);
-            // startActivity(intent);
+
+             Intent intent = new Intent(StudentHomeActivity.this, StudentViewNoticesActivity.class);
+             startActivity(intent);
         });
 
         reqToRemoveBtn.setOnClickListener(v -> {
-            // Intent intent = new Intent(StudentHomeActivity.this, ReqToRemoveActivity.class);
-            // intent.putExtra("LOGGED_IN_ROLL", loggedInRoll);
-            // startActivity(intent);
-        });
 
+             Intent intent = new Intent(StudentHomeActivity.this, StudentReqToRemoveActivity.class);
+             intent.putExtra("LOGGED_IN_ROLL", loggedInRoll);
+             startActivity(intent);
+        });
 
         signOutBtn.setOnClickListener(v -> {
             Intent intent = new Intent(StudentHomeActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
+        });
+
+        changePasswordBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(StudentHomeActivity.this, StudentChangePasswordActivity.class);
+            intent.putExtra("LOGGED_IN_ROLL", loggedInRoll);
+            startActivity(intent);
+        });
+
+        reqDiningManagerBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(StudentHomeActivity.this, StudentDiningManagerRequestActivity.class);
+            intent.putExtra("LOGGED_IN_ROLL", loggedInRoll);
+            startActivity(intent);
         });
     }
 }

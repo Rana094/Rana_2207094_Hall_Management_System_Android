@@ -36,8 +36,8 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         sendNoticeBtn.setOnClickListener(v -> {
 
-            // Intent intent = new Intent(AdminHomeActivity.this, AdminSendNoticeActivity.class);
-            // startActivity(intent);
+             Intent intent = new Intent(AdminHomeActivity.this, AdminSendNoticeActivity.class);
+             startActivity(intent);
             Toast.makeText(this, "Go to Send Notice Page", Toast.LENGTH_SHORT).show();
         });
 
@@ -56,7 +56,8 @@ public class AdminHomeActivity extends AppCompatActivity {
         });
 
         diningManagerApprovalBtn.setOnClickListener(v -> {
-            Toast.makeText(this, "Feature coming soon...", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(AdminHomeActivity.this, AdminDiningManagerApprovalActivity.class);
+            startActivity(intent);
         });
 
         calculateHallDueBtn.setOnClickListener(v -> {
@@ -68,8 +69,8 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         removeStudentBtn.setOnClickListener(v -> {
 
-            // Intent intent = new Intent(AdminHomeActivity.this, AdminRemoveRequestsActivity.class);
-            // startActivity(intent);
+             Intent intent = new Intent(AdminHomeActivity.this, AdminRemoveRequestsActivity.class);
+             startActivity(intent);
             Toast.makeText(this, "Go to Remove Requests", Toast.LENGTH_SHORT).show();
         });
 
