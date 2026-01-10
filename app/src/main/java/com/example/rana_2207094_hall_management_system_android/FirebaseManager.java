@@ -317,6 +317,82 @@ public class FirebaseManager {
         });
     }
 
+    public void setRemovalRequested(int roll, boolean requested, DatabaseCallback callback) {
+
+        dbRef.child(NODE_STUDENTS).child(String.valueOf(roll))
+                .child("removalRequested").setValue(String.valueOf(requested))
+                .addOnSuccessListener(aVoid -> callback.checkResult(true))
+                .addOnFailureListener(e -> callback.onError(e));
+    }
+
+    public void getRemovalRequests(final DatabaseCallback callback) {
+        dbRef.child(NODE_STUDENTS).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Student> requestList = new ArrayList<>();
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    Student student = data.getValue(Student.class);
+
+                    if (student != null) {
+                        String req = String.valueOf(data.child("removalRequested").getValue());
+                        if ("true".equalsIgnoreCase(req)) {
+                            requestList.add(student);
+                        }
+                    }
+                }
+                callback.onStudentListReceived(requestList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.onError(error.toException());
+            }
+        });
+    }
+
+    public void rejectRemovalRequest(int roll, final DatabaseCallback callback) {
+        dbRef.child(NODE_STUDENTS).child(String.valueOf(roll))
+                .child("removalRequested").setValue("false")
+                .addOnSuccessListener(aVoid -> callback.checkResult(true))
+                .addOnFailureListener(e -> callback.onError(e));
+    }
+
+    public void isDiningManagerSelected(String month, final DatabaseCallback callback) {
+        dbRef.child("DiningManagers").child(month).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                callback.checkResult(snapshot.exists());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.onError(error.toException());
+            }
+        });
+    }
+
+    public void hasAppliedForDiningManager(int roll, String month, final DatabaseCallback callback) {
+        dbRef.child("DiningManagerRequests").child(month).child(String.valueOf(roll))
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        callback.checkResult(snapshot.exists());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        callback.onError(error.toException());
+                    }
+                });
+    }
+
+    public void requestDiningManager(int roll, String month, DatabaseCallback callback) {
+
+        dbRef.child("DiningManagerRequests").child(month).child(String.valueOf(roll)).setValue(true)
+                .addOnSuccessListener(aVoid -> callback.checkResult(true))
+                .addOnFailureListener(e -> callback.onError(e));
+    }
+
 
 
 }

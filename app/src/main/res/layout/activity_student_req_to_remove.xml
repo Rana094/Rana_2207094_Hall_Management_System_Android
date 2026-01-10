@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="20dp"
+    tools:context=".StudentReqToRemoveActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@android:drawable/ic_dialog_alert"
+            android:layout_marginBottom="20dp"
+            app:tint="#D32F2F"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="If you want to leave the hall, click below to request for removal."
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:textAlignment="center"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Note: You must clear all hall dues first."
+            android:textSize="14sp"
+            android:textColor="#D32F2F"
+            android:textStyle="bold"
+            android:layout_marginBottom="30dp"/>
+
+        <Button
+            android:id="@+id/requestRemoveBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Click here to request for removal"
+            android:backgroundTint="#D32F2F"
+            android:textSize="16sp"
+            android:layout_marginBottom="15dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/goBackBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:text="Go Back"
+        android:backgroundTint="#757575"/>
+
+</RelativeLayout>
