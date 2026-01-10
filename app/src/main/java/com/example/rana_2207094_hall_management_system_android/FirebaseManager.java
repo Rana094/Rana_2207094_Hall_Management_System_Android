@@ -275,5 +275,48 @@ public class FirebaseManager {
     }
 
 
+    public void sendNotice(String title, String message, DatabaseCallback callback) {
+        String noticeId = dbRef.child("Notices").push().getKey();
+
+        if (noticeId != null) {
+            java.util.Map<String, Object> noticeData = new java.util.HashMap<>();
+            noticeData.put("title", title);
+            noticeData.put("message", message);
+            noticeData.put("date", System.currentTimeMillis());
+
+            dbRef.child("Notices").child(noticeId).setValue(noticeData)
+                    .addOnSuccessListener(aVoid -> callback.checkResult(true))
+                    .addOnFailureListener(e -> callback.onError(e));
+        } else {
+            callback.checkResult(false);
+        }
+    }
+
+    public void getAllNotices(final DatabaseCallback callback) {
+        dbRef.child("Notices").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                java.util.List<Notice> noticeList = new java.util.ArrayList<>();
+
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    Notice notice = data.getValue(Notice.class);
+                    if (notice != null) {
+                        noticeList.add(notice);
+                    }
+                }
+
+                java.util.Collections.reverse(noticeList);
+
+                callback.onNoticeListReceived(noticeList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.onError(error.toException());
+            }
+        });
+    }
+
+
 
 }
